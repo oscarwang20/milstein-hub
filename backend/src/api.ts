@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import { getEvents } from "./dao/eventsDao";
 
 dotenv.config({
   path: ".env",
@@ -12,6 +13,17 @@ app.get("/", (req, res) => {
   res.send("Hello Milstein!");
 });
 
+app.get("/api/events/", (req, res) => {
+  getEvents()
+    .then((events) => {
+      res.send(events);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Server listening on port ${port}`);
 });

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import getHello from "../api/api";
+import { getHello } from "../api/api";
 
 const Hello = () => {
   const hello = getHello();
