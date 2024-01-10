@@ -4,3 +4,10 @@ export type Event = {
   location: string;
   description: string;
 };
+
+export type User = {
+  netid: string;
+  fname: string;
+  lname: string;
+  email: string;
+};

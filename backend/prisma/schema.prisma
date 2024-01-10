@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DEV_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  email          String          @unique
+  name           String
+  admin          Boolean
+  netId          String          @unique
+  id             Int             @id @default(autoincrement())
+  equipment      Equipment[]
+  requests       RentalRequest[]
+  roomsRequested Room[]
+}
+
+model Equipment {
+  serial      Int             @id
+  name        String
+  description String
+  userId      Int?
+  dateRented  DateTime?
+  duration    Int?
+  renter      User?           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  requests    RentalRequest[]
+
+  @@index([userId])
+}
+
+model RentalRequest {
+  id            Int       @id @default(autoincrement())
+  userId        Int
+  equipmentId   Int
+  dateRequested DateTime  @default(now())
+  dateApproved  DateTime?
+  user          User      @relation(fields: [userId], references: [id])
+  equipment     Equipment @relation(fields: [equipmentId], references: [serial])
+
+  @@index([userId])
+  @@index([equipmentId])
+}
+
+model Room {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  startDate   DateTime
+  duration    Int
+  userId      Int
+  reserver    User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
