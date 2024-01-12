@@ -12,11 +12,3 @@ export const getHello = async (): Promise<String> => {
     .catch((err) => console.log(err));
   return response;
 };
-
-export const getEvents = async (): Promise<Event[]> => {
-  const response = await api
-    .get("/api/events/")
-    .then((res) => res.data)
-    .catch((err) => console.log(err));
-  return response;
-};
