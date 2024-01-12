@@ -1,4 +1,5 @@
-import { USER } from "../dao/base.dao";
+import { USER } from "../index";
+import { User } from "../types/types";
 
 /**
  *
@@ -15,4 +16,15 @@ export const getUserByNetId = async (netId: string) => {
   return USER.findUnique({ where: { netId: netId } });
 };
 
-// export const createUser = async (netId: string, name: string) => {
+/**
+ *
+ * @param newUser
+ * @returns
+ */
+export const createUser = async (newUser: User) => {
+  return USER.create({
+    data: {
+      ...newUser,
+    },
+  });
+};
