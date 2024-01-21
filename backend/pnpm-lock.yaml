@@ -11,6 +11,9 @@ dependencies:
   axios:
     specifier: ^1.6.2
     version: 1.6.2
+  common-types:
+    specifier: 1.0.0
+    version: 1.0.0
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
@@ -794,6 +797,10 @@ packages:
     engines: {node: '>= 0.8'}
     dependencies:
       delayed-stream: 1.0.0
+    dev: false
+
+  /common-types@1.0.0:
+    resolution: {integrity: sha512-q0hZ62j1FBF6dshbJ6FLm4M2jpxVrkFH/WgjzM8ba+aYTnNflYBrcoyUfhh0F4x4nSOBb8k5CDzHwDEHla5MOA==}
     dev: false
 
   /compressible@2.0.18:

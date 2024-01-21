@@ -1,0 +1,16 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+devDependencies:
+  common-types:
+    specifier: 1.0.0
+    version: 1.0.0
+
+packages:
+
+  /common-types@1.0.0:
+    resolution: {integrity: sha512-q0hZ62j1FBF6dshbJ6FLm4M2jpxVrkFH/WgjzM8ba+aYTnNflYBrcoyUfhh0F4x4nSOBb8k5CDzHwDEHla5MOA==}
+    dev: true

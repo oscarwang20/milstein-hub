@@ -1,19 +1,13 @@
 {
   "name": "milstein-hub",
   "version": "1.0.0",
-  "description": "An online management tool for the Milstein Program",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/oscarwang20/milstein-hub.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/oscarwang20/milstein-hub/issues"
-  },
-  "homepage": "https://github.com/oscarwang20/milstein-hub#readme"
+  "workspaces": [
+    "frontend",
+    "backend",
+    "common-types"
+  ],
+  "scripts": {},
+  "devDependencies": {
+    "common-types": "1.0.0"
+  }
 }
