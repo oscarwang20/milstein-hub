@@ -1,5 +1,5 @@
 import { User } from "../types";
-import { USER } from "../index";
+import { USER } from "../api";
 
 /**
  *
