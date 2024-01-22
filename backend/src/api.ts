@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Router } from "express";
 import { PrismaClient } from "@prisma/client";
 import dotenv from "dotenv";
 import {
@@ -13,10 +13,12 @@ import { User } from "./types";
 dotenv.config({
   path: ".env",
 });
+import serverless from "serverless-http";
 
 const app = express();
 app.use(express.json());
 const prisma = new PrismaClient();
+const router = Router();
 const port = process.env.PORT || 8080;
 
 export const USER = prisma.user;
@@ -24,23 +26,23 @@ export const EQUIPMENT = prisma.equipment;
 export const RENTAL_REQUEST = prisma.rentalRequest;
 export const ROOM = prisma.room;
 
-app.get("/api/", (req, res) => {
+router.get("/", (req, res) => {
   res.send("Hello Milstein!");
 });
 
-app.get("/api/users", (req, res) => {
+router.get("/users", (req, res) => {
   getUsers().then((users) => {
     res.status(200).send(users);
   });
 });
 
-app.get("/api/users/:netId", (req, res) => {
+router.get("/users/:netId", (req, res) => {
   getUserByNetId(req.params.netId).then((user) => {
     res.status(200).send(user);
   });
 });
 
-app.post("/api/users", (req, res) => {
+router.post("/users", (req, res) => {
   const json = req.body;
   const newUser: User = {
     ...json,
@@ -51,7 +53,7 @@ app.post("/api/users", (req, res) => {
     .catch((e) => res.send("User already exists!"));
 });
 
-app.delete("/api/users/:netId", (req, res) => {
+router.delete("/users/:netId", (req, res) => {
   deleteUserByNetId(req.params.netId)
     .then((user) => {
       res.status(200).send(user);
@@ -59,6 +61,12 @@ app.delete("/api/users/:netId", (req, res) => {
     .catch((e) => res.send("User does not exist!"));
 });
 
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
+if (process.env.NODE_ENV === "dev") {
+  app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
+  });
+}
+
+app.use("/api/", router);
+
+export const handler = serverless(app);
